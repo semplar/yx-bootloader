@@ -9,7 +9,7 @@ UNITY ?= 0
 
 USB_LIB_DIR = usb_lib
 
-INCDIRS = ./$(USB_LIB_DIR) ../libopencm3/include/
+INCDIRS = ./$(USB_LIB_DIR) libopencm3/include/
 INCFLAGS = $(patsubst %,-I%,$(INCDIRS))
 
 DEBUG = -g -gembed-source
