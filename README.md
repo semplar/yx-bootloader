@@ -8,10 +8,12 @@ The idea is to place the bootloader at the end of Flash region and make it trans
 
 The system bootloader protocol is described in: **AN3155: USART protocol used in the STM32 bootloader**.
 
-# Dependencies and device support
-Uses [libopencm3]([https://pages.github.com/](https://github.com/libopencm3/libopencm3)) library.
+# Prerequisites
 Only support for STM32F103 at the moment, but reliance on library may help to port to other devices.
+Compiler toolchain: open-source [ARM Toolchain for Embedded](https://github.com/arm/arm-toolchain).
+STM32 platform library: [libopencm3](https://github.com/libopencm3/libopencm3) library.
+Makefile expects it to be installed into "C:\Program Files\ATfE-20.1.0"
 
 # Project status
-Pre alpha.
+Status: pre-alpha.
 USB communication driver is being implemented.
