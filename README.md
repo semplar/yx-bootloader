@@ -1,11 +1,12 @@
 # Purpose
-STM32F103 device has 2048 bytes of system memory (read-only flash), containing bootloader talking to UART.
-Despite device fully supporting USB, the system bootloader doesn't support USB upload.
+STM32F103 device has 2048 bytes of read-only system flash memory, containing "burned-in" system bootloader.
+Despite device fully supporting USB, the system bootloader doesn't support USB for programming.
 
-The goal of this project is to write a minimalistic bootloader <= 2Kb that acts as CDC ACM device (UART to USB converter) and let directly upload firmware to device with the same protocol as system bootloader uses.
+The goal of this project is to write a minimalistic <=2Kb bootloader that acts as UART to USB converter and lets reprogram device through the same protocol as system bootloader uses, so it will be possible to use STM32CubeProgrammer without hooking USB-to-Serial converter.
 
-It is impossible to replace the system bootloader because system memory is read-only.
-The idea is to place the bootloader at the end of Flash region and make it transparently update default ISR at 0x08000000 during reprogramming.
+It is impossible to directly replace the system bootloader because the system memory is read-only.
+There is 64 kb flash, but boot always starts from flash begin by default, and taking over beginning region of flash will interfere with application.
+The idea is to place the bootloader at the end of flash region so it transparently updates default ISR at flash start during reprogramming.
 
 The system bootloader protocol is described in [AN3155: USART protocol used in the STM32 bootloader](https://www.st.com/resource/en/application_note/an3155-usart-protocol-used-in-the-stm32-bootloader-stmicroelectronics.pdf).
 
